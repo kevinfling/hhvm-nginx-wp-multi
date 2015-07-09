@@ -5,8 +5,7 @@ location ~ ^/(composer\.|Procfile$|<?=getenv('COMPOSER_VENDOR_DIR')?>/|<?=getenv
 
 location / {
 
-  #gzip  on;
-  gzip_static  on;
+  gzip  on;
   gzip_http_version 1.1;
   gzip_vary on;
   gzip_comp_level 6;
@@ -14,12 +13,11 @@ location / {
   gzip_types text/plain text/html text/css application/json application/javascript application/x-javascript text/javascript text/xml application/xml application/rss+xml application/atom+xml application/rdf+xml;
 
   # make sure gzip does not lose large gzipped js or css files
-  #gzip_buffers 16 8k;
+  gzip_buffers 16 8k;
 
   # Disable gzip for "certain" (ahem) browsers.
   #gzip_disable msie6;
-
-
+  
   index  index.php;
   rewrite ^wp-json/(.+)$ /index.php?json_route=$1 last;
 
