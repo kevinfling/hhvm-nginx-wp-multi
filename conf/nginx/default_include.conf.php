@@ -26,7 +26,12 @@ location ^~ /blogs.dir {
   access_log off; log_not_found off;      expires max;
 }
 
-if (!-e $request_filename) { rewrite ^.* /index.php break; }
+if (!-e $request_filename) {
+ rewrite ^/files(.*) /wp-includes/ms-files.php?file=$1 last;
+ rewrite ^(/[^/]+)?(/wp-.*) $2 last;
+ rewrite ^(/[^/]+)?(/.*.php) $2 last;
+ rewrite ^.*$ /index.php last;
+}
 
 #if (!-e $request_filename) {
 #  rewrite /wp-admin$ $scheme://$host$uri/ permanent;
