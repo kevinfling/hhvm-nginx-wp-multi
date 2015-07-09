@@ -2,13 +2,7 @@ location / {
   try_files $uri $uri/ /index.php?$args;
 }
 
-if (!-e $request_filename) {
- rewrite ^/files(.*) /wp-includes/ms-files.php?file=$1 last;
- rewrite ^(/[^/]+)?(/wp-.*) $2 last;
- rewrite ^(/[^/]+)?(/.*.php) $2 last;
- rewrite ^.*$ /index.php last;
-}
-
+if (!-e $request_filename) { rewrite ^.* /index.php break; }
 
 # for people with app root as doc root, restrict access to a few things
 location ~ ^/(composer\.|Procfile$|<?=getenv('COMPOSER_VENDOR_DIR')?>/|<?=getenv('COMPOSER_BIN_DIR')?>/) {
