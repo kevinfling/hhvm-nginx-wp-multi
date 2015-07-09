@@ -17,11 +17,11 @@
     # }
   }
 
-  location ~ .*\.php$ {
-    include         /app/vendor/nginx/conf/fastcgi_params;
-    fastcgi_pass    unix:/tmp/php-fpm.socket;
-    fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
-  }
+  #location ~ .*\.php$ {
+  #  include         /app/vendor/nginx/conf/fastcgi_params;
+  #  fastcgi_pass    unix:/tmp/php-fpm.socket;
+  #  fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
+  #}
 
 # for people with app root as doc root, restrict access to a few things
 location ~ ^/(composer\.|Procfile$|<?=getenv('COMPOSER_VENDOR_DIR')?>/|<?=getenv('COMPOSER_BIN_DIR')?>/) {
