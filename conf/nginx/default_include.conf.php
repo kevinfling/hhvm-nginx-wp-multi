@@ -6,6 +6,7 @@ location ~ ^/(composer\.|Procfile$|<?=getenv('COMPOSER_VENDOR_DIR')?>/|<?=getenv
 location / {
 
   index  index.php;
+  rewrite ^wp-json/(.+)$ /index.php?json_route=$1 last;
 
   # wordpress fancy rewrites
   if (-f $request_filename) {
@@ -17,5 +18,5 @@ location / {
   }
 
   rewrite ^(.+)$ /index.php?q=$1 last;
-  
+
 }
