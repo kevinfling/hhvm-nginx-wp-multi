@@ -10,7 +10,7 @@ location / {
   gzip_vary on;
   gzip_comp_level 6;
   gzip_proxied any;
-  gzip_types text/plain text/html text/css application/json application/javascript application/x-javascript text/javascript text/xml application/xml application/rss+xml application/atom+xml application/rdf+xml;
+  gzip_types text/plain text/css application/json application/javascript application/x-javascript text/javascript text/xml application/xml application/rss+xml application/atom+xml application/rdf+xml;
 
   # make sure gzip does not lose large gzipped js or css files
   gzip_buffers 16 8k;
