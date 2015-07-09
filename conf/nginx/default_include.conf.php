@@ -1,7 +1,3 @@
-map $http_host $blogid {
-    default       -999;
-    include /wp-content/plugins/nginx-helper/map.conf;
-}
 
   location / {
     # wordpress fancy rewrites
