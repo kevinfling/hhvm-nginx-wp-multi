@@ -16,7 +16,7 @@ dep_dirname=hhvm_${dep_version}
 #if [[ $STACK == "cedar" ]]; then
 #    dep_archive_name=${dep_dirname}~lucid_amd64.deb
 #else
-    dep_archive_name=${dep_dirname}~trusty_amd64.deb
+    dep_archive_name=${dep_dirname}~utopic_amd64.deb
 #fi
 dep_url=http://dl.hhvm.com/ubuntu/pool/main/h/hhvm/${dep_archive_name}
 
