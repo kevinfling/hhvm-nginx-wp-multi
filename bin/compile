@@ -192,7 +192,7 @@ if [[ "${HHVM_VERSION}" ]]; then
     PGSQL_URL="https://github.com/PocketRent/hhvm-pgsql/blob/releases/3.3.0/ubuntu/trusty/pgsql.so"
     echo "- HHVM $HHVM_VERSION" | indent
     curl --silent --location "$HHVM_DIST_URL" | tar xz -C $BUILD_DIR/.heroku/php
-    curl --silent --location "$PGSQL_URL" > $BUILD_DIR/.heroku/php/pgsql.so
+    curl --silent --location "$PGSQL_URL" > /app/.heroku/php/etc/hhvm/pgsql.so
     # store HHVM version in the slug for possible later evaluation
     mkdir -p $BUILD_DIR/.heroku/php/.versions/hhvm
     echo $HHVM_VERSION > $BUILD_DIR/.heroku/php/.versions/hhvm/hhvm
