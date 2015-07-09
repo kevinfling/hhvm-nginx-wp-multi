@@ -4,6 +4,7 @@ location ~ ^/(composer\.|Procfile$|<?=getenv('COMPOSER_VENDOR_DIR')?>/|<?=getenv
 }
 
 location / {
+
   index  index.php;
 
   # wordpress fancy rewrites
@@ -16,10 +17,5 @@ location / {
   }
 
   rewrite ^(.+)$ /index.php?q=$1 last;
+  
 }
-
-#location ~ .*\.php$ {
-#  include         /app/vendor/nginx/conf/fastcgi_params;
-#  fastcgi_pass    unix:/tmp/php-fpm.socket;
-#  fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
-#}
