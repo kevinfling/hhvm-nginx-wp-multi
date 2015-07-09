@@ -55,7 +55,7 @@ http {
         error_log stderr;
         access_log /tmp/heroku.nginx_access.<?=getenv('PORT')?:'8080'?>.log;
         
-        include "default_include.conf.php";
+        include default_include.conf.php;
         
         # restrict access to hidden files, just in case
         location ~ /\. {
