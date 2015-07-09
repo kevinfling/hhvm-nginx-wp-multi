@@ -13,4 +13,7 @@ memory_limit = 128M
 hhvm.server.type = fastcgi
 hhvm.server.file_socket = /tmp/heroku.fcgi.<?=getenv('PORT')?>.sock
 hhvm.server.thread_count = <?=getenv('WEB_CONCURRENCY')?:8?>
-hhvm.extensions[pgsql] = /app/.heroku/php/etc/hhvm/pgsql.so
+DynamicExtensionPath = /app/.heroku/php/etc/hhvm
+DynamicExtensions {
+  * = pgsql.so
+}
