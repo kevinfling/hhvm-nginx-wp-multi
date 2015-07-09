@@ -24,16 +24,8 @@ http {
         server unix:/tmp/heroku.fcgi.<?=getenv('PORT')?:'8080'?>.sock max_fails=3 fail_timeout=3s;
         keepalive 16;
     }
-
+    
     server {
-
-                
-        map $http_host $blogid {
-            default       -999;
-            include /wp-content/plugins/nginx-helper/map.conf;
-        }
-
-
         # define an easy to reference name that can be used in try_files
         location @heroku-fcgi {
             include fastcgi_params;
@@ -63,7 +55,7 @@ http {
         error_log stderr;
         access_log /tmp/heroku.nginx_access.<?=getenv('PORT')?:'8080'?>.log;
         
-        include default_include.conf.php;
+        include "<?=getenv('HEROKU_PHP_NGINX_CONFIG_INCLUDE')?>";
         
         # restrict access to hidden files, just in case
         location ~ /\. {
