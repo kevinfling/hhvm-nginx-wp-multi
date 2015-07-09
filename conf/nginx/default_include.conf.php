@@ -10,21 +10,32 @@ location ~ ^/(composer\.|Procfile$|<?=getenv('COMPOSER_VENDOR_DIR')?>/|<?=getenv
 # Add trailing slash to */wp-admin requests.
 rewrite /wp-admin$ $scheme://$host$uri/ permanent;
 
-# Directives to send expires headers and turn off 404 error logging.
-location ~* ^.+\.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$ {
-       access_log off; log_not_found off; expires max;
+location ~ ^/files/(.*)$ {
+  try_files /wp-content/blogs.dir/$blogid/$uri /wp-includes/ms-files.php?file=$1 ;
+  access_log off; log_not_found off; expires max;
 }
 
-# Rewrite rules for WordPress Multi-site.
+location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+  expires 24h;
+  log_not_found off;
+}
+
+location ^~ /blogs.dir {
+  internal;
+  alias /var/www/pathtoyoursite/web/wp-content/blogs.dir ;
+  access_log off; log_not_found off;      expires max;
+}
+
 if (!-e $request_filename) {
   rewrite /wp-admin$ $scheme://$host$uri/ permanent;
   rewrite ^/[_0-9a-zA-Z-]+(/wp-.*) $1 last;
   rewrite ^/[_0-9a-zA-Z-]+(/.*\.php)$ $1 last;
 }
 
-# Uncomment one of the lines below for the appropriate caching plugin (if used).
-#include global/wordpress-wp-super-cache.conf;
-#include global/wordpress-w3-total-cache.conf;
+# Directives to send expires headers and turn off 404 error logging.
+#location ~* ^.+\.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$ {
+#  access_log off; log_not_found off; expires max;
+#}
 
 # Pass all .php files onto a php-fpm/php-fcgi server.
 location ~ \.php$ {
