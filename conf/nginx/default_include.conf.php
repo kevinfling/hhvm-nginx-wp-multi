@@ -26,11 +26,13 @@ location ^~ /blogs.dir {
   access_log off; log_not_found off;      expires max;
 }
 
-if (!-e $request_filename) {
-  rewrite /wp-admin$ $scheme://$host$uri/ permanent;
-  rewrite ^/[_0-9a-zA-Z-]+(/wp-.*) $1 last;
-  rewrite ^/[_0-9a-zA-Z-]+(/.*\.php)$ $1 last;
-}
+if (!-e $request_filename) { rewrite ^.* /index.php break; }
+
+#if (!-e $request_filename) {
+#  rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+#  rewrite ^/[_0-9a-zA-Z-]+(/wp-.*) $1 last;
+#  rewrite ^/[_0-9a-zA-Z-]+(/.*\.php)$ $1 last;
+#}
 
 # Directives to send expires headers and turn off 404 error logging.
 #location ~* ^.+\.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$ {
