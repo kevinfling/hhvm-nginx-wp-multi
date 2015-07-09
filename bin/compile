@@ -189,7 +189,7 @@ if [[ "${PHP_VERSION}" ]]; then
 fi
 if [[ "${HHVM_VERSION}" ]]; then
     HHVM_DIST_URL="$S3_URL/hhvm-$HHVM_VERSION.tar.gz"
-    PGSQL_URL="https://github.com/PocketRent/hhvm-pgsql/raw/releases/3.7.0/ubuntu/trusty/pgsql.so"
+    PGSQL_URL="https://github.com/PocketRent/hhvm-pgsql/blob/releases/3.6.0/ubuntu/trusty/pgsql.so"
     echo "- HHVM $HHVM_VERSION" | indent
     curl --silent --location "$HHVM_DIST_URL" | tar xz -C $BUILD_DIR/.heroku/php
     curl --silent --location "$PGSQL_URL" > /app/.heroku/php/etc/hhvm/pgsql.so
