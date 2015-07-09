@@ -25,11 +25,6 @@ http {
         keepalive 16;
     }
 
-    map $http_host $blogid {
-        default       -999;
-        include /wp-content/plugins/nginx-helper/map.conf;
-    }
-    
     server {
         # define an easy to reference name that can be used in try_files
         location @heroku-fcgi {
