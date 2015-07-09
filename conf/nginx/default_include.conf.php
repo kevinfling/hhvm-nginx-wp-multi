@@ -2,7 +2,7 @@
 
 map $http_host $blogid {
     default       -999;
-    include /wp-content/plugins/nginx-helper/map.conf;
+    #include /wp-content/plugins/nginx-helper/map.conf;
 }
 
 
